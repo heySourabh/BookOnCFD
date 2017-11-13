@@ -60,3 +60,22 @@ plt.plot(x, np.sin(x))
 plt.show()
 ```
 
+5. **Working with numpy array:** The numpy library has a load of features designed for numerical computation. The base of most of the computations is the ndarray class. Some of the important operations on an array object include creation, data access and slicing which are shown in the code snippet below.
+
+```python
+import numpy as np
+# numpy array can be created in many ways. Here are a few examples
+a1 = np.array([5, 4, 8, 9])   # array initialized with a list of numbers
+a2 = np.zeros(10)             # array of size 10 filled with 0.0
+a3 = np.ones(100)             # array of size 100 filled with 1.0
+
+# numpy array is zero indexed, therefore the first element has index of 0
+num = a1[0]                   # num is assigned first value of a1. 5 in this case.
+
+# slicing provides a sub view of the array [start : end+1 : stride]
+sub = a1[1 : 3]               # sub points to a part of array a1 -> [4, 8]
+```
+
+In this book the libraries `numpy` and `matplotlib` are extensively used. These libraries are very well documented and the community around Python is very helpful and friendly. If you do not understand any of the syntax presented, then a simple search over the Internet should be good enough to get the required help.
+
+
