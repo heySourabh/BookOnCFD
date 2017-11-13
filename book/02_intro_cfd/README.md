@@ -30,6 +30,6 @@ The process of CFD is made up of the following three steps:
 2. **Solving** or numerical manipulations to solve for the parameters of interest at required points in space and time.
 3. **Post-processing** or displaying results so that the solution is presented in a much more understandable way, then just numbers.
 
-These three steps are explained in next section with a simple example problem to solve hydrostatic law differential equation. The remainder of this chapter will explain the various aspects of CFD by using the problem defined in the next section.
+These three steps are explained in next section with a simple example problem to solve hydrostatic law differential equation.
 
 
