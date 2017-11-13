@@ -1,5 +1,5 @@
 # BookOnCFD
-> The journey of a book on programming computational fluid dynamics software as it evolves
+> A book on the journey of programming computational fluid dynamics software as it evolves
 
 The book being written will focus on good programming practices to be considered while writing a computational fluid dynamics software. This being a book, we will start by looking at the basic aspects of CFD and its applications. Then, we will dive into the basic structure of a CFD code and propose an algorithm. The algorithm will be modeled in an abstract sense into a code. As an how different aspects of the CFD are written in the book, they will reflect in the code as well.
 
