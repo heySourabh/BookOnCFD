@@ -1,5 +1,5 @@
 # A Very Brief Introduction to Python
-![Python Logo](python-logo.svg)
+![Python Logo](images/python-logo.svg)
 ## Introduction
 This chapter is added just to make you feel comfortable in understanding the syntax used for CFD codes in this book, which are written in Python programming language. If you already know Python, then you may choose to skip this chapter, and you may use Internet resources to understand the specific feature of the language when you come across something new in the CFD codes in upcoming chapters. Python is a computer programming language of choice now-a-days for the purpose of demonstrations, prototyping and testing applications. Python, due to its clear and readable syntax, is also easy to learn and demonstrate algorithms to a third person. Therefore, it is a very powerful tool for teachers to demonstrate complex algorithms to students. The additional libraries available for Python language (like numpy and matplotlib) are very rich in functionality and are very robust. This makes Python a programming language of choice for scientific analysis and numerical computations. This small tutorial on Python is by no means a complete reference of the programming language, and the reader is advised to refer to more complete books to understand the language in greater detail.
 
