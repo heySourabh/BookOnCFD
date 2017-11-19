@@ -54,3 +54,20 @@ This is the exact solution of pressure governed by the differential equation at 
 1. We have obtained a closed form solution. In other words, we may substitute any value of depth in place of ![](https://latex.codecogs.com/gif.latex?H) to obtain an exact solution of pressure as required.
 2. However, if the density function was complicated then carrying out the integration would have been very difficult. In fact, for problems in two or three dimensions it may not be possible to integrate complicated coupled functions over a general geometry analytically.
 
+Now let us attempt to solve this problem numerically. Before we start, we need to understand that computers cannot efficiently work with continuous equations or obtain closed form solutions. So we need to prepare the geometry and equations in a discrete form, also known as the pre-processing step. The basic idea is to divide the domain (fluid depth), where we want to apply the differential equation, into smaller parts so that the integration can be performed numerically part by part. This process of division of geometry is also known as meshing or grid-generation. This being a simple equation with one independent variable ![](https://latex.codecogs.com/gif.latex?h), the domain can be represented by a straight line. It is therefore very easy to divide the domain by laying down ![](https://latex.codecogs.com/gif.latex?N) number of points as shown in figure below.
+
+<img alt="Discretized domain for ocean depth" src="images/HydrostaticProblem.svg" width=25%/>
+
+The ![](https://latex.codecogs.com/gif.latex?N) grid points are numbered as ![](https://latex.codecogs.com/gif.latex?i%3D0%2C1%2C2%2C%5Cldots%2CN-1); and the corresponding depths and pressures are denoted as ![](https://latex.codecogs.com/gif.latex?h_%7B0%7D%2Ch_%7B1%7D%2Ch_%7B2%7D%2C%5Cldots%2Ch_%7BN-1%7D) and ![](https://latex.codecogs.com/gif.latex?p_%7B0%7D%2Cp_%7B1%7D%2Cp_%7B2%7D%2C%5Cldots%2Cp_%7BN-1%7D) respectively. Using the definition of derivatives we may write,
+
+![](https://latex.codecogs.com/gif.latex?%5Cfrac%7Bdp%7D%7Bdh%7D%3D%5Clim_%7B%5CDelta%20h%5Crightarrow0%7D%5Cfrac%7Bp%5Cleft%28h%5Cright%29-p%5Cleft%28h-%5CDelta%20h%5Cright%29%7D%7B%5CDelta%20h%7D.)
+
+ Assuming that the value of ![](https://latex.codecogs.com/gif.latex?%5CDelta%20h) is very small, we may drop the limit to obtain an approximation for the derivative as, 
+ 
+ ![](https://latex.codecogs.com/gif.latex?%5Cfrac%7Bdp%7D%7Bdh%7D%5Capprox%5Cfrac%7Bp%5Cleft%28h%5Cright%29-p%5Cleft%28h-%5CDelta%20h%5Cright%29%7D%7B%5CDelta%20h%7D.)
+ 
+ Evaluating the derivative at an arbitrary point, ![](https://latex.codecogs.com/gif.latex?i%3DI), in the domain we can write the above equation as, 
+ 
+ ![](https://latex.codecogs.com/gif.latex?%5Cfrac%7Bdp%7D%7Bdh%7D%5Capprox%5Cfrac%7Bp%5Cleft%28h_%7BI%7D%5Cright%29-p%5Cleft%28h_%7BI%7D-%5CDelta%20h%5Cright%29%7D%7B%5CDelta%20h%7D%3D%5Cfrac%7Bp_%7BI%7D-p_%7BI-1%7D%7D%7B%5CDelta%20h%7D.)
+ 
+ This is the end of the pre-processing stage of CFD process.
