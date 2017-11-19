@@ -5,20 +5,28 @@ Computational fluid dynamics, commonly known by its abbreviation CFD, is made of
 ## Applications
 The areas in which CFD techniques are applied are enormous and evolving. As a matter of fact, if you have an unsolved problem defined as a PDE or integral equations, than you can apply CFD techniques to solve your problem. As such, the areas of application are continuously growing. Some of these applications are in the fields listed below.
 
-- Aerospace engineering
-- Automobile engineering
-- Civil engineering
-- Chemical engineering
-- Shipbuilding engineering
-- Internal Combustion Engines
-- Wildfire simulations
-- Evacuation planning
-- Ground water simulations
-- Petroleum explorations
-- Weather predictions
-- Biomedical applications
-- Entertainment industry
-- Pollution control
+<table>
+  <tr>
+    <td><ul>
+      <li>Aerospace engineering</li>
+      <li>Automobile engineering</li>
+      <li>Civil engineering</li>
+      <li>Chemical engineering</li>
+      <li>Shipbuilding engineering</li>
+      <li>Internal Combustion Engines</li>
+      <li>Wildfire simulations</li>
+    </ul></td>
+    <td><ul>
+      <li>Evacuation planning</li>
+      <li>Ground water simulations</li>
+      <li>Petroleum explorations</li>
+      <li>Weather predictions</li>
+      <li>Biomedical applications</li>
+      <li>Entertainment industry</li>
+      <li>Pollution control</li>
+    </ul></td>
+  </tr>
+</table>
 
 TODO: Add pictures of applications
 
@@ -30,6 +38,7 @@ The process of CFD is made up of the following three steps:
 2. **Solving** or numerical manipulations to solve for the parameters of interest at required points in space and time.
 3. **Post-processing** or displaying results so that the solution is presented in a much more understandable way, then just numbers.
 
-These three steps are explained in next section with a simple example problem to solve hydrostatic law differential equation.
-
-
+These three steps are explained with a simple example problem by solving the differential equation for hydrostatic law. Consider a problem, where we need to calculate the pressure under the ocean at a depth of ![](https://latex.codecogs.com/gif.latex?H%3D400%5Ctext%7Bm%7D) below the water level. The differential equation is the well-known hydrostatic law given by, ![](https://latex.codecogs.com/gif.latex?dp%3D%5Crho%20g%5C%2Cdh), where ![](https://latex.codecogs.com/gif.latex?p) is the pressure, ![](https://latex.codecogs.com/gif.latex?%5Crho)
+  is the density, ![](https://latex.codecogs.com/gif.latex?g%3D9.81%5Ctext%7B%20m/s%7D%5E%7B2%7D)
+  is the acceleration due to gravity and ![](https://latex.codecogs.com/gif.latex?h)
+  is the depth. To make things interesting, let us assume that the density is a function of depth given by ![](https://latex.codecogs.com/gif.latex?%5Crho%3D%5Cleft%281000&plus;h%5Cright%29%5Ctext%7B%20kg/m%7D%5E%7B3%7D). A schematic of this problem is shown in figure below.
