@@ -71,3 +71,41 @@ The ![](https://latex.codecogs.com/gif.latex?N) grid points are numbered as ![](
  ![](https://latex.codecogs.com/gif.latex?%5Cfrac%7Bdp%7D%7Bdh%7D%5Capprox%5Cfrac%7Bp%5Cleft%28h_%7BI%7D%5Cright%29-p%5Cleft%28h_%7BI%7D-%5CDelta%20h%5Cright%29%7D%7B%5CDelta%20h%7D%3D%5Cfrac%7Bp_%7BI%7D-p_%7BI-1%7D%7D%7B%5CDelta%20h%7D.)
  
  This is the end of the pre-processing stage of CFD process.
+ 
+ ----
+ 
+ The solver step starts by substituting the discretized form of derivatives into the governing equation (hydrostatic law) to obtain an approximate form of governing equation. The governing equation, 
+ 
+ ![](https://latex.codecogs.com/gif.latex?%5Cfrac%7Bdp%7D%7Bdh%7D%3D%5Crho%20g%2C)
+ 
+ may be therefore written at point, ![](https://latex.codecogs.com/gif.latex?i%3DI), as, 
+ 
+ ![](https://latex.codecogs.com/gif.latex?%5Cfrac%7Bp_%7BI%7D-p_%7BI-1%7D%7D%7B%5CDelta%20h%7D%3D%5Crho_%7BI%7Dg.)
+ 
+ ![](https://latex.codecogs.com/gif.latex?p_%7BI%7D%3Dp_%7BI-1%7D&plus;%5Crho_%7BI%7Dg%5CDelta%20h.)
+ 
+ Here, ![](https://latex.codecogs.com/gif.latex?%5Crho_%7BI%7D) is the density at point ![](https://latex.codecogs.com/gif.latex?I), which can be easily obtained by using the function for density as ![](https://latex.codecogs.com/gif.latex?%5Crho_%7BI%7D%3D%5Cleft%281000&plus;h_%7BI%7D%5Cright%29) and the value of depth ![](https://latex.codecogs.com/gif.latex?h_%7BI%7D%3Dh_%7B0%7D&plus;I%5C%2C%5CDelta%20h%3DI%5C%2C%5CDelta%20h), assuming uniform division of the domain. The approximate form of the governing equation is basically an algebraic equation which can be solved by a computer to obtain an approximate solution. Writing descrete form of governing equation for point ![](https://latex.codecogs.com/gif.latex?i%3D1), we get, 
+ 
+ ![](https://latex.codecogs.com/gif.latex?p_%7B1%7D%3Dp_%7B0%7D&plus;%5Crho_%7B1%7Dg%5CDelta%20h%2C)
+ 
+ ![](https://latex.codecogs.com/gif.latex?p_%7B1%7D%3Dp_%7B0%7D&plus;%5Cleft%281000&plus;1%5Ctimes%5CDelta%20h%5Cright%29%5C%2Cg%5C%2C%5CDelta%20h.)
+ 
+ Since the gauge pressure at the surface of the ocean can be taken as zero, ![](https://latex.codecogs.com/gif.latex?p_%7B0%7D%3D0), this results in 
+ 
+ ![](https://latex.codecogs.com/gif.latex?p_%7B1%7D%3D%5Cleft%281000&plus;%5CDelta%20h%5Cright%29%5Ctimes9.81%5Ctimes%5CDelta%20h)
+ 
+ This is the numerically calculated pressure for point ![](https://latex.codecogs.com/gif.latex?i%3D1). The value of ![](https://latex.codecogs.com/gif.latex?%5CDelta%20h) depends on the number of divisions chosen for discretization of the domain. If we choose ![](https://latex.codecogs.com/gif.latex?N%3D5), then ![](https://latex.codecogs.com/gif.latex?%5CDelta%20h%3DH/4), since there are 4 parts of the domain with 5 points. In general we will get ![](https://latex.codecogs.com/gif.latex?%5CDelta%20h%3DH/%5Cleft%28N-1%5Cright%29). Continuing with the calculation of pressure for the next few points ![](https://latex.codecogs.com/gif.latex?i%3D2), ![](https://latex.codecogs.com/gif.latex?i%3D3) and ![](https://latex.codecogs.com/gif.latex?i%3D4) using descrete form of governing equation we get,
+ 
+ ![](https://latex.codecogs.com/gif.latex?p_%7B2%7D%3Dp_%7B1%7D&plus;%5Cleft%281000&plus;2%5Ctimes%5CDelta%20h%5Cright%29%5Ctimes9.81%5Ctimes%5CDelta%20h)
+ 
+ ![](https://latex.codecogs.com/gif.latex?p_%7B3%7D%3Dp_%7B2%7D&plus;%5Cleft%281000&plus;3%5Ctimes%5CDelta%20h%5Cright%29%5Ctimes9.81%5Ctimes%5CDelta%20h)
+ 
+ ![](https://latex.codecogs.com/gif.latex?p_%7B4%7D%3Dp_%7B3%7D&plus;%5Cleft%281000&plus;4%5Ctimes%5CDelta%20h%5Cright%29%5Ctimes9.81%5Ctimes%5CDelta%20h)
+ 
+ It can be observed that we can progressively calculate the value of pressure at grid points with increasing depth applying the descrete governing equation again and again. Let us now manually do some calculations to obtain the pressure values at various grid points. Let us choose ![](https://latex.codecogs.com/gif.latex?N%3D5), therefore ![](https://latex.codecogs.com/gif.latex?%5CDelta%20h%3D400/4%3D100). Substituting ![](https://latex.codecogs.com/gif.latex?%5CDelta%20h) in equation for ![](https://latex.codecogs.com/gif.latex?p_1) we can obtain a solution as ![](https://latex.codecogs.com/gif.latex?p_%7B1%7D%3D%5Cleft%281000&plus;100%5Cright%29%5Ctimes9.81%5Ctimes100%3D%5Cmathbf%7B1079100%7D%5Ctext%7BPa%7D). The unit of the pressure as Pascal is an outcome of using consistent standard units for all the substitutions. Computers do not understand physical units, so we need to make sure that all numbers are in consistent standard units. Moving on, let us now calculate the pressure at point 2. Now using equation equation for ![](https://latex.codecogs.com/gif.latex?p_2) we can substitute the already calculated value of ![](https://latex.codecogs.com/gif.latex?p_%7B1%7D) and ![](https://latex.codecogs.com/gif.latex?%5CDelta%20h) to obtain the pressure ![](https://latex.codecogs.com/gif.latex?p_%7B2%7D). Therefore, ![](https://latex.codecogs.com/gif.latex?p_%7B2%7D%3D1079100&plus;%281000&plus;2%5Ctimes100%29%5Ctimes9.81%5Ctimes100%3D%5Cmathbf%7B2256300%7D%5Ctext%7BPa%7D). Continuing the calculation let us now use equation for ![](https://latex.codecogs.com/gif.latex?p_3) for calculation of pressure at point 3 which turns out to be ![](https://latex.codecogs.com/gif.latex?p_%7B3%7D%3D2256300&plus;%5Cleft%281000&plus;3%5Ctimes100%5Cright%29%5Ctimes9.81%5Ctimes100%3D%5Cmathbf%7B3531600%7D%5Ctext%7BPa%7D). Finally, the value that we are interested in ![](https://latex.codecogs.com/gif.latex?p_%7B4%7D%3D3531600&plus;%5Cleft%281000&plus;4%5Ctimes100%5Cright%29%5Ctimes9.81%5Ctimes100%3D%5Cmathbf%7B4905000%7D%5Ctext%7BPa%7D). Compare this value to the analytically calculated value of ![](https://latex.codecogs.com/gif.latex?4708800%5Ctext%7BPa%7D). There is such a huge error ![](https://latex.codecogs.com/gif.latex?%5Cleft%284905000-4708800%5Cright%29%3D196200%5Ctext%7BPa%7D). However, it makes more sense to look at the percentage error, which turns out to be, ![](https://latex.codecogs.com/gif.latex?100%5Ctimes196200/4708800%3D4.17%5C%25). The behavior of error and its understanding is very important and we will look at it briefly in the next section. But before we do that, let us make a couple of observations to contradict with the analytical solutions. The numerical solutions obtained have the following characteristics:
+1. The solution process did not require any application of the rules of calculus. The approximate integration was done purely by algebraic additions, which computers can perform easily. This is beneficial as the process can be generalized to very complex geometries.
+2. The solution is obtained only at few discrete points along the depth. We do not have a continuous solution and therefore this is more of an engineering solution. If you want to analyze the solution mathematically then this is of not much use.
+
+This is the end of the solver step and next step in the CFD process is post-processing.
+
+----
