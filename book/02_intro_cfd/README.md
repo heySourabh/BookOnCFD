@@ -54,7 +54,7 @@ This is the exact solution of pressure governed by the differential equation at 
 1. We have obtained a closed form solution. In other words, we may substitute any value of depth in place of ![](https://latex.codecogs.com/gif.latex?H) to obtain an exact solution of pressure as required.
 2. However, if the density function was complicated then carrying out the integration would have been very difficult. In fact, for problems in two or three dimensions it may not be possible to integrate complicated coupled functions over a general geometry analytically.
 
-Now let us attempt to solve this problem numerically. Before we start, we need to understand that computers cannot efficiently work with continuous equations or obtain closed form solutions. So we need to prepare the geometry and equations in a discrete form, also known as the pre-processing step. The basic idea is to divide the domain (fluid depth), where we want to apply the differential equation, into smaller parts so that the integration can be performed numerically part by part. This process of division of geometry is also known as meshing or grid-generation. This being a simple equation with one independent variable ![](https://latex.codecogs.com/gif.latex?h), the domain can be represented by a straight line. It is therefore very easy to divide the domain by laying down ![](https://latex.codecogs.com/gif.latex?N) number of points as shown in figure below.
+Now let us attempt to solve this problem numerically. Before we start, we need to understand that computers cannot efficiently work with continuous equations or obtain closed form solutions. So we need to prepare the geometry and equations in a discrete form, also known as the **pre-processing** step. The basic idea is to divide the domain (fluid depth), where we want to apply the differential equation, into smaller parts so that the integration can be performed numerically part by part. This process of division of geometry is also known as meshing or grid-generation. This being a simple equation with one independent variable ![](https://latex.codecogs.com/gif.latex?h), the domain can be represented by a straight line. It is therefore very easy to divide the domain by laying down ![](https://latex.codecogs.com/gif.latex?N) number of points as shown in figure below.
 
 <img alt="Discretized domain for ocean depth" src="images/HydrostaticProblem.svg" width=25%/>
 
@@ -74,7 +74,7 @@ The ![](https://latex.codecogs.com/gif.latex?N) grid points are numbered as ![](
  
  ----
  
- The solver step starts by substituting the discretized form of derivatives into the governing equation (hydrostatic law) to obtain an approximate form of governing equation. The governing equation, 
+ The **solver** step starts by substituting the discretized form of derivatives into the governing equation (hydrostatic law) to obtain an approximate form of governing equation. The governing equation, 
  
  ![](https://latex.codecogs.com/gif.latex?%5Cfrac%7Bdp%7D%7Bdh%7D%3D%5Crho%20g%2C)
  
@@ -109,3 +109,73 @@ The ![](https://latex.codecogs.com/gif.latex?N) grid points are numbered as ![](
 This is the end of the solver step and next step in the CFD process is post-processing.
 
 ----
+
+The **post-processing** step mostly refers to visualization of the data produced by the solver in a meaningful manner. However, it may mean other things like generation of report or passing on the data as input to other processes. The visualization of data can be done in numerous ways, like line or point graph, histogram or bar charts, contour plots, generation of images from the data etc. For visualization of the data I am using the matplotlib library from Python to draw a simple line plot of pressure versus depth as shown in figure below.
+
+<img alt="Visualization of pressure variation versus depth (post-processing step)" src="images/pressure_N=5.png" width=60%/>
+
+A simple problem was chosen to provide with an insight into the steps of CFD: pre-processor, solver and post-processor. The main reason for this distinction between steps is that in large industries, working on CFD simulations, these processes are separated into different departments. Each of the three steps are very important and lot of research has been done and is continuing in each of these fields for complicated geometries, robust solvers and better visualization of results.
+
+## Errors in CFD
+The results obtained using CFD approach are not exact as seen earlier by comparing the numerical solution with analytical solution. The difference between the exact and numerical solution is termed as error and is generally measured as relative error or percentage error. In case of the example solved above the error in pressure may be written as,
+
+![](https://latex.codecogs.com/gif.latex?%5Ctext%7BAbsolute%20error%7D%3Dp_%7Bnumerical%7D-p_%7Bexact%7D)
+
+![](https://latex.codecogs.com/gif.latex?%5Ctext%7BRelative%20error%7D%3D%5Cfrac%7Bp_%7Bnumerical%7D-p_%7Bexact%7D%7D%7Bp_%7Bexact%7D%7D)
+
+![](https://latex.codecogs.com/gif.latex?%5Ctext%7BPercentage%20error%7D%3D%5Cfrac%7Bp_%7Bnumerical%7D-p_%7Bexact%7D%7D%7Bp_%7Bexact%7D%7D%5Ctimes100.)
+
+ The advantage of using the relative or percentage error over absolute error is that in case of the former the error is automatically scaled. However, care must be taken to make sure that the denominator is not equal to zero. The errors occurring in CFD can be broadly classified into two types:
+
+1. Discretization error: The discretization error can be due to geometry discretization and PDE discretization.
+    1. Geometry discretization: error due to approximating the complicated geometry with simple sub-geometries.
+    2. PDE discretization: error due to approximating the PDE (or integral equation) with simplified algebraic equations. This error is the cause of most of the complexity in CFD formulations.
+2. Equation modeling error: The PDE being solved might itself be an approximation to the real physical phenomenon. For example, the PDE might be neglecting the effects of gravity or viscosity or magnetic fields which may modify the solution marginally, but simplifying the PDE considerably. The error due to such a simplification of PDE is termed as equation modeling error. Therefore while solving a problem the underlying PDE must be critically analyzed for suitability for the designed application, otherwise the error due to simplification of PDE may render the solution unusable for the desired application.
+
+### Effect of mesh refinement
+The addition of points to refine mesh has a dual advantage of capturing the geometry better (thus reducing geometry discretization error) and reducing the mesh size, i.e. value of ![](https://latex.codecogs.com/gif.latex?%5CDelta%20h) (thus reducing the PDE discretization error). In the previous example therefore we may expect reduction of error by increasing the number of grid points. If we recalculate the value of pressure at a depth of ![](https://latex.codecogs.com/gif.latex?400%5Ctext%7Bm%7D), but now with say 8 divisions instead of 4 divisions, we now have a ![](https://latex.codecogs.com/gif.latex?%5CDelta%20h) of ![](https://latex.codecogs.com/gif.latex?50%5Ctext%7Bm%7D) instead of ![](https://latex.codecogs.com/gif.latex?100%5Ctext%7Bm%7D). Writing algebraic equations for each of the 8 grid points results in 8 equations instead of 4 equations. The error reduces to ![](https://latex.codecogs.com/gif.latex?2.08%5C%25) and we obtain a pressure of ![](https://latex.codecogs.com/gif.latex?4806900%5Ctext%7BPa%7D) at the depth of ![](https://latex.codecogs.com/gif.latex?400%5Ctext%7Bm%7D) as the numerical solution. The additional accuracy in solution comes at an additional computational cost.
+
+## Program for solving hydrostatic differential equation
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+g = 9.81
+def analytical_p(h):
+    return (1000 * h + h**2 / 2) * g
+    
+def rho(h):
+    return 1000.0 + h
+    
+H = 400.0
+N = 20
+
+p = np.zeros(N)
+dh = H / (N - 1)
+
+for i in range(1, N):
+    h = i * dh
+    p[i] = p[i-1] + rho(h) * g * dh
+    
+print("%f"%p[N-1])
+plt.gca().invert_yaxis()
+height = np.linspace(0.0, H, N)
+
+plt.plot(p, height, "o", label="Numerical", ms=8)
+plt.plot(analytical_p(height), height, "-", lw=3, label="Analytical")
+
+plt.xlabel("$p$", fontsize=20)
+plt.ylabel("$h$", fontsize=20)
+
+plt.grid()
+plt.legend(loc="best")
+
+plt.savefig("pressure.png")
+plt.show()
+```
+This is the first CFD code in this book and this book and the accompanying repository is full of CFD codes. In fact, one of the objectives of this book is to display CFD techniques through coded examples. It is a firm belief of the author, that CFD can be learnt only by practicing it, by writing your own code. Therefore, I urge you to rewrite all the example code using a programming language of your interest and reproduce the plots and results given in this book. The figure below shows the result produced by the program for solving the hydrostatic differential equation.
+
+<img alt="Result of pressure versus depth" src="images/pressure_N=20.png" width="60%"/>
+
+## This is just the beginning...
+Computational fluid dynamics is much more than solution of one-dimensional ordinary differential equation. The example presented earlier was to give a very broad overview of the CFD process. The equations solved in the real world of CFD are very complicated and require knowledge of behavior of PDEs to tackle the problems. The next chapter presents the governing equations of fluid flows which are fairly complicated and tightly coupled system of equations. Later the various PDE types and their behavior is explained in detail and the methodology to be used for solving them. All the explanations are accompanied with proper demonstration code to reinforce the concepts presented. The reason for including this section is to encourage you and make you aware of what is yet to come in subsequent chapters. After reading further a few more chapters you will feel comfortable to take over the world of CFD.
