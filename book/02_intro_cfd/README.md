@@ -38,7 +38,19 @@ The process of CFD is made up of the following three steps:
 2. **Solving** or numerical manipulations to solve for the parameters of interest at required points in space and time.
 3. **Post-processing** or displaying results so that the solution is presented in a much more understandable way, then just numbers.
 
-These three steps are explained with a simple example problem by solving the differential equation for hydrostatic law. Consider a problem, where we need to calculate the pressure under the ocean at a depth of ![](https://latex.codecogs.com/gif.latex?H%3D400%5Ctext%7Bm%7D) below the water level. The differential equation is the well-known hydrostatic law given by, ![](https://latex.codecogs.com/gif.latex?dp%3D%5Crho%20g%5C%2Cdh), where ![](https://latex.codecogs.com/gif.latex?p) is the pressure, ![](https://latex.codecogs.com/gif.latex?%5Crho)
-  is the density, ![](https://latex.codecogs.com/gif.latex?g%3D9.81%5Ctext%7B%20m/s%7D%5E%7B2%7D)
-  is the acceleration due to gravity and ![](https://latex.codecogs.com/gif.latex?h)
-  is the depth. To make things interesting, let us assume that the density is a function of depth given by ![](https://latex.codecogs.com/gif.latex?%5Crho%3D%5Cleft%281000&plus;h%5Cright%29%5Ctext%7B%20kg/m%7D%5E%7B3%7D). A schematic of this problem is shown in figure below.
+These three steps are explained with a simple example problem by solving the differential equation for hydrostatic law. Consider a problem, where we need to calculate the pressure under the ocean at a depth of ![](https://latex.codecogs.com/gif.latex?H%3D400%5Ctext%7Bm%7D) below the water level. The differential equation is the well-known hydrostatic law given by, ![](https://latex.codecogs.com/gif.latex?dp%3D%5Crho%20g%5C%2Cdh), where ![](https://latex.codecogs.com/gif.latex?p) is the pressure, ![](https://latex.codecogs.com/gif.latex?%5Crho) is the density, ![](https://latex.codecogs.com/gif.latex?g%3D9.81%5Ctext%7B%20m/s%7D%5E%7B2%7D) is the acceleration due to gravity and ![](https://latex.codecogs.com/gif.latex?h) is the depth. To make things interesting, let us assume that the density is a function of depth given by ![](https://latex.codecogs.com/gif.latex?%5Crho%3D%5Cleft%281000&plus;h%5Cright%29%5Ctext%7B%20kg/m%7D%5E%7B3%7D). A schematic of this problem is shown in figure below.
+
+<img src="images/HydrostaticProblem_1.svg" width=50% alt="Example"/>
+
+Before attempting to solve this problem numerically, let us solve it analytically using the rules of calculus. Integrating the differential equation between ![](https://latex.codecogs.com/gif.latex?h%3D0%5Ctext%7Bm%7D) and ![](https://latex.codecogs.com/gif.latex?h%3D400%5Ctext%7Bm%7D), we get, 
+ 
+![](https://latex.codecogs.com/gif.latex?%5Cintop_%7B0%7D%5E%7Bp%7Ddp%3D%5Cintop_%7B0%7D%5E%7Bh%3DH%7Dg%5Cleft%281000&plus;h%5Cright%29%5C%2Cdh)
+ 
+![](https://latex.codecogs.com/gif.latex?%5Cimplies%20p%3D9.81%5Ctimes%5Cleft%281000%5Ctimes%20H&plus;%5Cfrac%7BH%5E%7B2%7D%7D%7B2%7D%5Cright%29)
+
+![](https://latex.codecogs.com/gif.latex?%5Cimplies%5Cleft.p%5Cright%7C_%7Bh%3D400%7D%3D9.81%5Ctimes%5Cleft%281000%5Ctimes400&plus;%5Cfrac%7B400%5E%7B2%7D%7D%7B2%7D%5Cright%29%3D%5Cmathbf%7B4708800%7D%5Ctext%7BPa%7D.)
+
+This is the exact solution of pressure governed by the differential equation at a depth of ![](https://latex.codecogs.com/gif.latex?h%3D400%5Ctext%7Bm%7D), with the assumed density distribution. Some observations that one can make here are,
+1. We have obtained a closed form solution. In other words, we may substitute any value of depth in place of ![](https://latex.codecogs.com/gif.latex?H) to obtain an exact solution of pressure as required.
+2. However, if the density function was complicated then carrying out the integration would have been very difficult. In fact, for problems in two or three dimensions it may not be possible to integrate complicated coupled functions over a general geometry analytically.
+
