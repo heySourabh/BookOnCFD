@@ -83,6 +83,7 @@ The diffusion coefficients like ![](https://latex.codecogs.com/gif.latex?%5Cmu) 
 ![](https://latex.codecogs.com/gif.latex?%5Cmu%3D%5Cmu_%7B0%7D%5Cfrac%7BT_%7B0%7D&plus;C%7D%7BT&plus;C%7D%5Cleft%28%5Cfrac%7BT%7D%7BT_%7B0%7D%7D%5Cright%29%5E%7B3/2%7D.)
 
 This can be simplified to,
+
 ![](https://latex.codecogs.com/gif.latex?%5Cmu%3DC_%7B0%7D%5Cfrac%7BT%5E%7B3/2%7D%7D%7BT&plus;C%7D%5Cquad%5Ctext%7Bwith%7D%5Cquad%20C_%7B0%7D%3D%5Cmu_%7B0%7D%5Cfrac%7BT_%7B0%7D&plus;C%7D%7BT_%7B0%7D%5E%7B3/2%7D%7D%5C%20.)
 
 The dynamic viscosity for air as function of temperature (in Kelvin) turns out to be,
