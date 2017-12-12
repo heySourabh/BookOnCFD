@@ -94,7 +94,7 @@ In cases of gases, the relation of Prandtl number is used for definition of ![](
 
 ![](https://latex.codecogs.com/gif.latex?k%3D%5Cfrac%7B%5Cmu%5C%2Cc_%7Bp%7D%7D%7BPr%7D%5C%20%2C)
 
-and the Prandtl number, ![](https://latex.codecogs.com/gif.latex?Pr), is assumed to be constant. Similarly empirical relations can be used for calculation of the fluid coefficients as a function of local flow properties.
+and the Prandtl number, ![](https://latex.codecogs.com/gif.latex?Pr), is assumed to be constant for gases. In case of air, the Prandtl number is taken to be 0.72 for the complete domain. Similarly, empirical relations are available for other gases and liquids for calculation of coefficients as a function of local flow variables.
 
 The source term in the momentum equations is a result of any body forces, such as gravity force, with force density vector per unit volume given by ![](https://latex.codecogs.com/gif.latex?g%3D%5Cleft%28g_%7Bx%7D%2Cg_%7By%7D%2Cg_%7Bz%7D%5Cright%29). The source term in the energy equation is a result of the work done by the body forces and heat generation with in the fluid due to sources, such as chemical reactions or radiation heat transfer.
 
